@@ -25,5 +25,13 @@ var inicio = new Vue({
 			}).finally(function() {
 			});
 		},
-    }
+		deleteProduto(id, i){
+			fetch("/mercado/rs/produtos/"+ id,{
+				method: "DELETE"
+			})
+			.then(() =>{
+				this.listaProdutos.splice(i, 1);
+			})
+		}
+    },
 });

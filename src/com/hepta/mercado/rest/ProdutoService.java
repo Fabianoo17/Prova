@@ -100,7 +100,14 @@ public class ProdutoService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@DELETE
 	public Response produtoDelete(@PathParam("id") Integer id) {
-		return Response.status(Status.NOT_IMPLEMENTED).build();
+		
+		try {
+		  dao.delete(id);
+		} catch(Exception e) {
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro ao Deletar").build();
+		}
+		
+		return Response.status(Status.OK).build();
 	}
 
 }

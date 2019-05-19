@@ -11,7 +11,7 @@
 </head>
 
 <body>
-
+<a href="/mercado/novo-produto.html">Novo Produto</a>
 
 	<div id="inicio" class="container-fluid table" >
 		<h4>Lista de Produtos</h4>
@@ -33,7 +33,7 @@
 			  <td>{{ produto.unidade }}</td> 
 			  <td>{{ produto.estoque }}</td>
 			  <td><span @click="">&#9998;</span>
-				<span  @click="">&#10006;</span>
+				<span  @click="deleteProduto(produto.id, i)">&#10006;</span>
 			  </td>
 			</tr>
 		  </tbody>
