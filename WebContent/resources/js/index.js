@@ -1,6 +1,9 @@
 var inicio = new Vue({
 	el:"#inicio",
     data: {
+    	listaFabricantes : [],
+    	fabricante: "",
+    	editProduto:null,
         listaProdutos: [],
         listaProdutosHeader: [
 			{sortable: false, key: "nome", label:"Nome"},
@@ -12,7 +15,9 @@ var inicio = new Vue({
     },
     created: function(){
         let vm =  this;
-        vm.buscaProdutos();
+        vm.buscaProdutos(),
+       
+        vm.buscarFabricantes();
     },
     methods:{
         buscaProdutos: function(){
@@ -32,6 +37,31 @@ var inicio = new Vue({
 			.then(() =>{
 				this.listaProdutos.splice(i, 1);
 			})
-		}
+		},
+		editarProduto(produto){
+			
+			fetch("/mercado/rs/produtos/"+ produto.id,{
+				body: JSON.stringify(produto),
+				method: "PUT",
+					headers:{
+						"Content-Type" : "application/json"
+					}
+			})
+			.then(() =>{
+				this.editProduto = null;
+			})
+		},
+		buscarFabricantes: function(){
+			const vm = this;
+			axios.get("/mercado/rs/fabricante").then(response => {
+				vm.listaFabricantes = response.data;
+			}).catch(function (error) {
+			}).finally(function() {
+			});
+		},
     },
+
+
 });
+
+

@@ -41,25 +41,30 @@ public class ProdutoService {
 		this.request = request;
 	}
 	
-	/**
-	 * Adiciona novo produto no mercado
-	 * 
-	 * @param produto: Novo produto
-	 * @return response 200 (OK) - Conseguiu adicionar
-	 */
+
+	
+	
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@POST
 	public Response produtoCreate(Produto produto) {
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+		
+		try {
+			dao.save(produto);
+		} catch(Exception e) {
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro ao criar produto " + produto.getNome()).build();
+		}
+		
 	
-	/**
-	 * Lista todos os produtos do mercado
-	 * 
-	 * @return response 200 (OK) - Conseguiu listar
-	 */
+		return Response.status(Status.OK).entity("Produto " + produto.getNome() + "adicionado.").build();
+		
+
+	}
+
+	
+
+	
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@GET
@@ -75,27 +80,29 @@ public class ProdutoService {
 		return Response.status(Status.OK).entity(entity).build();
 	}
 	
-	/**
-	 * Atualiza um produto no mercado
-	 * 
-	 * @param id: id do produto
-	 * @param produto: Produto atualizado
-	 * @return response 200 (OK) - Conseguiu atualiza
-	 */
+
+	
+	
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@PUT
-	public Response produtoUpdate(@PathParam("id") Integer id, Produto produto) {
-		return Response.status(Status.NOT_IMPLEMENTED).build();
+public Response produtoUpdate(@PathParam("id") Integer id, Produto produto) {
+		
+		try {
+			dao.update(produto);
+		} catch(Exception e) {
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro ao editar produto " + produto.getNome()).build();
+		}
+		
+		//GenericEntity<Produto> entity = new GenericEntity<Produto>(produto) {};
+		return Response.status(Status.OK).entity("Produto " + produto.getNome() + "atualizado").build();
 	}
+
 	
-	/**
-	 * Remove um produto do mercado
-	 * 
-	 * @param id: id do produto
-	 * @return response 200 (OK) - Conseguiu remover
-	 */
+
+	
+	
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@DELETE

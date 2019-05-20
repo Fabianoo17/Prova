@@ -14,21 +14,47 @@
 
 <a href="/mercado/index.html">Voltar</a>
 
-<div id="app">
-	<p>{{mensagem}}</p>
-	
-	<h4>Produtos:</h4>
-	<ul>
-		<li v-for="produto in produtos">
-			{{produto}}
-		</li>
-	</ul>
-</div>
+<div class="container-fluid">
 
-<script src="../resources/js/vue.min.js"></script>
-<script src="../resources/js/axios.min.js"></script>
-<script src="../resources/js/polyfill.min.js"></script>
-<script src="../resources/js/bootstrap.min.js"></script>
-<script src="../resources/js/cadastro-de-produtos.js"></script>
+
+    <form id="novo-produto" @submit="salvarProduto()">
+   
+        <label for="nome">Nome:</label>
+        <input class="form-control" v-model="produto.nome" id="nome" autocomplete="off">
+
+
+  
+        <label for="fabricante">Fabricante:</label>
+        <select class="form-control" v-model="fabricante">
+				<option v-for="fab in listaFabricantes">{{ fab.nome }}</option>
+			</select>
+   
+
+    
+        <label for="volume">Volume: </label>
+        <input class="form-control" v-model="produto.volume" id="volume" autocomplete="off">
+    
+      
+     
+        <label for="unidade">Unidade: </label>
+        <input class="form-control" v-model="produto.unidade" id="unidade" autocomplete="off">
+    
+      
+    
+        <label for="estoque">Estoque: </label>
+        <input class="form-control" v-model="produto.estoque" id="estoque" autocomplete="off">
+    
+
+      <button type="submit" class="btn btn-primary" >Salvar</button>
+
+    </form>
+  </div>
+
+
+<script src="resources/js/vue.js"></script>
+<script src="resources/js/axios.min.js"></script>
+<script src="resources/js/polyfill.min.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>
+<script src="resources/js/novo-produto.js"></script>
 </body>
 </html>
