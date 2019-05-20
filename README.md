@@ -1,5 +1,4 @@
 ﻿# processo-seletivo
 
-Não tive tempo para implementar testes
+Foram realizadas as implementação de deletar e atualizar e criar produtos.
 
-Tem que inserir o fabricante pelo banco.
